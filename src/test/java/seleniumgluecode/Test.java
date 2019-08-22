@@ -30,17 +30,26 @@ public class Test {
 
     @When("user enters username and Password")
     public void user_enters_username_and_Password() throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"email_create\"]")).sendKeys("galinaprokofevna99@gmail.com");
+        driver.findElement(By.xpath("//*[@id=\"SubmitCreate\"]/span")).click();
+        /*driver.findElement(By.id("email")).sendKeys("galinaprokofevna@gmail.com");
+        driver.findElement(By.id("passwd")).sendKeys("kslsrpgid12345");
+        driver.findElement(By.id("SubmitLogin")).click();*/
+    }
+
+    /*@When("user signs up")
+    public void user_signs_up() throws Throwable {
         driver.findElement(By.id("email")).sendKeys("blog.cucumber@gmail.com");
         driver.findElement(By.id("passwd")).sendKeys("Cucumber@blog");
         driver.findElement(By.id("SubmitLogin")).click();
-    }
+    }*/
 
-    @Then("success message is displayed")
+    /*@Then("success message is displayed")
     public void success_message_is_displayed() throws Throwable {
-        String exp_message = "Welcome to your account. Here you can manage all   of your personal information and orders.";
+        String exp_message = "Welcome to your account. Here you can manage all of your personal information and orders.";
         String actual = driver.findElement(By.cssSelector(".info-account")).getText();
         Assert.assertEquals(exp_message, actual);
-        driver.quit();
-    }
+        //driver.quit();
+    }*/
 
 }
