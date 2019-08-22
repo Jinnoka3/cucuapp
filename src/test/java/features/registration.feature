@@ -6,3 +6,4 @@ Feature: Login Feature
     When user navigates to Login Page
     And user signs up
     Then user is on account page
+
