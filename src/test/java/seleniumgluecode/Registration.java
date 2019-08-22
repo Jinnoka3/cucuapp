@@ -1,6 +1,8 @@
 package seleniumgluecode;
 
 import java.util.concurrent.TimeUnit;
+
+import cucumber.api.java.en.And;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,35 +14,22 @@ import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
-public class Registration {
-
-    public static WebDriver driver;
-
-    @Given("user is on homepage")
-    public void user_is_on_homepage() throws Throwable {
-        //System.setProperty("webdriver.gecko.driver","/Users/Documents/geckodriver");
-        System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
-        //driver = new FirefoxDriver();
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://automationpractice.com/index.php");
-    }
-
+public class Registration extends Base{
     @When("user navigates to Login Page")
     public void user_navigates_to_Login_Page() {
+        user_is_on_homepage();
         driver.findElement(By.linkText("Sign in")).click();
     }
 
-    @When("user signs up")
+    @And("user signs up")
     public void user_signs_up() {
-
-        driver.findElement(By.xpath("//*[@id=\"email_create\"]")).sendKeys("galinaprokofevna99@gmail.com");
+        driver.findElement(By.xpath("//*[@id=\"email_create\"]")).sendKeys(email);
         driver.findElement(By.xpath("//*[@id=\"SubmitCreate\"]/span")).click();
 
         By.xpath(".//input[@id='id_gender2']").findElement(driver).click();
 
-        By.name("customer_firstname").findElement(driver).sendKeys("Daria");
-        By.xpath("//*[@id=\"customer_lastname\"]").findElement(driver).sendKeys("Kalinina");
+        By.name("customer_firstname").findElement(driver).sendKeys(firstname);
+        By.xpath("//*[@id=\"customer_lastname\"]").findElement(driver).sendKeys(lastname);
         By.xpath("//*[@id=\"passwd\"]").findElement(driver).sendKeys("12345");
 
         Select dropdown1 = new Select(driver.findElement(By.xpath("//*[@id=\"days\"]")));
@@ -86,7 +75,7 @@ public class Registration {
         By.xpath("//*[@id=\"submitAccount\"]/span").findElement(driver).click();
     }
 
-    @Then("user is on account page")
+    @When("user is on account page")
     public void success_message_is_displayed() throws Throwable {
         Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"columns\"]/div[1]/span[2]")).isDisplayed());
     }
